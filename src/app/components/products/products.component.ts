@@ -36,7 +36,7 @@ export class ProductsComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.getAllProducts();
+    // this.getAllProducts();
     this.getProducts(this.start, this.items);
   }
 

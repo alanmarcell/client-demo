@@ -57,7 +57,7 @@ export class ProductService {
 
   delete(product: Product) {
 
-    const url = `${this.oneProductUrl}/${product._id}`;
+    let url = `${this.oneProductUrl}/${product._id}`;
 
     return this.http
       .delete(url)
@@ -76,7 +76,7 @@ export class ProductService {
 
   private put(product: Product) {
 
-    const url = `${this.oneProductUrl}/${product._id}`;
+    let url = `${this.oneProductUrl}/${product._id}`;
 
     return this.http
       .put(url, JSON.stringify(product))

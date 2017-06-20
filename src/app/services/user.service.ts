@@ -33,7 +33,7 @@ export class UserService {
 
   delete(user: User) {
 
-    const url = `${this.usersUrl}/${user._id}`;
+    let url = `${this.usersUrl}/${user._id}`;
 
     return this.http
       .delete(url)
@@ -54,7 +54,7 @@ export class UserService {
 
   private put(user: User) {
 
-    const url = `${this.usersUrl}/${user._id}`;
+    let url = `${this.usersUrl}/${user._id}`;
 
     return this.http
       .put(url, JSON.stringify(user))

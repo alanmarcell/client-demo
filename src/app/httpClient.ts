@@ -1,43 +1,43 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Injectable()
 export class HttpClient {
   headers: Headers;
+  options: RequestOptions;
   constructor(private http: Http) {
-    this.getHeaders();
+    this.getOptions();
   }
 
   get(url) {
-    this.getHeaders();
-    return this.http.get('http://localhost:3000/' + url, {
-      headers: this.headers
-    });
+    this.getOptions();
+    return this.http.get('http://localhost:3000/' + url, this.options);
   }
 
   post(url, data) {
-    this.getHeaders();
-    return this.http.post('http://localhost:3000/' + url, data, {
-      headers: this.headers
-    });
+    this.getOptions();
+    return this.http.post('http://localhost:3000/' + url , data, this.options);
   }
+
   put(url, data) {
-    this.getHeaders();
-    return this.http.put('http://localhost:3000/' + url, data, {
-      headers: this.headers
-    });
+    this.getOptions();
+    return this.http.put('http://localhost:3000/' + url, data, this.options);
   }
+
   delete(url) {
+    this.getOptions();
+    return this.http.delete('http://localhost:3000/' + url, this.options);
+  }
+
+  private getOptions() {
     this.getHeaders();
-    return this.http.delete('http://localhost:3000/' + url, {
-      headers: this.headers
-    });
+    this.options = new RequestOptions({ headers: this.headers });
   }
 
   private getHeaders() {
     this.headers = new Headers({
-      'x-access-token': localStorage.getItem('_token'),
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'x-access-token': localStorage.getItem('_token')
     });
   }
 }
