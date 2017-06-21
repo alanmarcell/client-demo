@@ -33,6 +33,9 @@
                 <div class="form-group">
                   <div class="row">
                     <div class="col-sm-6 col-sm-offset-3">
+                      <span *ngIf='error' class="form-control alert-danger">
+                        {{error}}
+                      </span>
                       <input type="submit" [disabled]=myForm.form.invalid (click)="authenticate()" class="form-control btn btn-login" value="Log In">
                     </div>
                   </div>

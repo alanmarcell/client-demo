@@ -24,7 +24,7 @@
           <th>Delete</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf='products && products.length'>
         <tr *ngFor="let product of products" [class.active]="product === selectedProduct">
           <td>{{product.name}}</td>
           <td>{{product.category}}</td>

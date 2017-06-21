@@ -48,8 +48,8 @@ export class AuthService {
       .toPromise()
       .then(response => {
         this.token = response.json().token;
-        var expiresSeconds = Number(response.json().expiresIn);
-        console.log(response.json());
+        if (response.json().success === false) { throw response };
+        const expiresSeconds = Number(response.json().expiresIn);
         if (this.token) {
           this.authenticated = true;
           this.startExpiresTimer(expiresSeconds);
@@ -75,6 +75,6 @@ export class AuthService {
 
   private handleError(error: any) {
     console.error('An error occurred', error);
-    return Promise.reject(error.message || error);
+    return Promise.reject(error.message || error.json().message || error);
   }
 }

@@ -31,12 +31,15 @@ export class ProductsComponent implements OnInit, OnChanges {
   getAllProducts() {
     this.productService.getAllProducts().then(products => {
       this.numProd = products.length;
+      if (!this.numProd) {
+        this.error = 'No products yet';
+      }
     });
 
   }
 
   ngOnInit() {
-    // this.getAllProducts();
+    this.getAllProducts();
     this.getProducts(this.start, this.items);
   }
 

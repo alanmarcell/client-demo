@@ -5,28 +5,30 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 export class HttpClient {
   headers: Headers;
   options: RequestOptions;
+  base = 'http://localhost:3010/';
   constructor(private http: Http) {
     this.getOptions();
   }
 
+
   get(url) {
     this.getOptions();
-    return this.http.get('http://localhost:3000/' + url, this.options);
+    return this.http.get(this.base + url, this.options);
   }
 
   post(url, data) {
     this.getOptions();
-    return this.http.post('http://localhost:3000/' + url , data, this.options);
+    return this.http.post(this.base + url, data, this.options);
   }
 
   put(url, data) {
     this.getOptions();
-    return this.http.put('http://localhost:3000/' + url, data, this.options);
+    return this.http.put(this.base + url, data, this.options);
   }
 
   delete(url) {
     this.getOptions();
-    return this.http.delete('http://localhost:3000/' + url, this.options);
+    return this.http.delete(this.base + url, this.options);
   }
 
   private getOptions() {
