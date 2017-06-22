@@ -37,4 +37,6 @@ export class User implements IUserArgs {
   email: string;
   admin: boolean;
   displayName: string;
+  password: string;
+  userNameOrEmail?: string;
 }

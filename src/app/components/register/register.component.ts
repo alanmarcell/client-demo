@@ -40,8 +40,10 @@ export class RegisterComponent implements OnInit {
   }
 
   authenticate() {
+    this.user.userNameOrEmail = this.user.email || this.user.userName;
+
     this.authenticationService
-      .authenticateUser(this.user)
+      .authenticateUserPtz(this.user)
       .catch(error => this.error = error);
   }
 

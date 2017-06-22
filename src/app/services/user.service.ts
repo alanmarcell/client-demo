@@ -51,8 +51,6 @@ export class UserService {
   }
 
   private post(user: User): Promise<User> {
-
-    console.log('post !!!!')
     return this.http
       .post(this.usersUrl, JSON.stringify(user))
       .toPromise()
@@ -63,8 +61,6 @@ export class UserService {
   }
 
   private postPtz(user: User): Promise<User> {
-
-    console.log('postPtz')
     return this.http
       .post(this.usersPtzUrl, JSON.stringify(user))
       .toPromise()

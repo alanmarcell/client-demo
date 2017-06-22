@@ -18,7 +18,7 @@
             <div class="col-lg-12">
               <form #myForm='ngForm'>
                 <div class="form-group">
-                  <input required #name='ngModel' name='name' type="text" [(ngModel)]="user.name" class="form-control" placeholder="Username"
+                  <input required #name='ngModel' name='userNameOrEmail' type="text" [(ngModel)]="user.userNameOrEmail" class="form-control" placeholder="Username"
                     value="">
                   <span *ngIf='name.invalid' class="form-control alert-danger">
 									Nome Obrigatório

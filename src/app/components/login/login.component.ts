@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
   authenticate() {
     this.authenticationService
-      .authenticateUser(this.user)
+      .authenticateUserPtz(this.user)
       .catch(error => this.error = error);
   }
 
