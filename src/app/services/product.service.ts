@@ -24,12 +24,18 @@ export class ProductService {
       .toPromise()
       .then(response => response.json())
       .catch(this.handleError);
-    // return this.http.get(this.allProductsUrl)
-    //   .toPromise()
-    //   .then(response => {
-    //     return response.json();
-    //   })
-    //   .catch(this.handleError);
+  }
+
+
+  seed() {
+    console.log('seed')
+    return this.http.get('api/seed')
+      .toPromise()
+      .then(response => {
+        console.log('response', response.json());
+        return response.json();
+      })
+      .catch(this.handleError);
   }
 
   getAllProducts() {
@@ -40,6 +46,7 @@ export class ProductService {
       })
       .catch(this.handleError);
   }
+
   getProduct(id: string): Promise<Product> {
 
     return this.http.get(this.oneProductUrl + '/' + id)
