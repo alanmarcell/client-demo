@@ -20,6 +20,8 @@ export class CartComponent implements OnInit, OnChanges {
   items = 5;
   numProd: number;
   start = 0;
+  user = {};
+  checkedOut = false;
 
   constructor(
     private router: Router,
@@ -55,14 +57,15 @@ export class CartComponent implements OnInit, OnChanges {
 
   idEq = (prod) => R.propEq('_id', prod._id)
 
-  addToCart(selectedProduct: Product, quantity: number) {
+  addToCart(selectedProduct: Product, quantity: string) {
+    const quantityN = parseInt(quantity, 10);
+    if (!quantityN) { return this.removeFromCart(selectedProduct) };
     const p = R.find(this.idEq(selectedProduct))(this.cart.productList);
-    selectedProduct.quantity = quantity;
+
+    selectedProduct.quantity = quantityN;
     selectedProduct.subTotal = selectedProduct.quantity * selectedProduct.price;
-    if (p) {
-      this.getTotal();
-      return;
-    };
+
+    if (p) { return this.getTotal(); };
     this.cart.productList.push(selectedProduct);
     this.getTotal();
   }
@@ -75,11 +78,14 @@ export class CartComponent implements OnInit, OnChanges {
   getTotal() {
     this.cart.total = 0;
     this.cart.productList.map(p => { this.cart.total += p.subTotal })
-    console.log('TOTAL :::', this.cart.total);
   }
 
   submitCart() {
-    console.log(this.cart);
+    this.checkedOut = true;
+  }
+
+  order() {
+    alert('Pedido finalizado');
   }
 
   next() {
