@@ -10,7 +10,7 @@ import { routing } from './app.routing';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductsComponent } from './components/products/products.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CartComponent } from './components/cart/cart.component';
 import { ProductDetailComponent } from './components/productDetail/product-detail.component';
 
 import { LoggedInGuard } from './guards/loggedIn.guard';
@@ -31,7 +31,7 @@ import { UserService } from './services/user.service';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent,
+    CartComponent,
     ProductDetailComponent,
     ProductsComponent
   ],

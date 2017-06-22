@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CartComponent } from './components/cart/cart.component';
 import { ProductsComponent } from './components/products/products.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductDetailComponent } from './components/productDetail/product-detail.component';
@@ -8,8 +8,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoggedInGuard } from './guards/loggedIn.guard';
 const appRoutes: Routes = [
   {
-    path: 'dashboard',
-    component: DashboardComponent,
+    path: 'cart',
+    component: CartComponent,
     canActivate: [LoggedInGuard]
   },
   {
