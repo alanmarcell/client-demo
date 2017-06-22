@@ -7,7 +7,6 @@ import { User } from '../models/user';
 export class UserService {
 
   private usersUrl = 'api/users';  // URL to web api
-  private usersPtzUrl = 'api/seedusers';
 
   constructor(private http: HttpClient) { }
 
@@ -32,14 +31,6 @@ export class UserService {
     return this.post(user);
   }
 
-  savePtz(user: User): Promise<User> {
-    if (user._id) {
-      console.log('USER ID', user._id);
-      return this.put(user);
-    }
-    return this.postPtz(user);
-  }
-
   delete(user: User) {
 
     const url = `${this.usersUrl}/${user._id}`;
@@ -53,16 +44,6 @@ export class UserService {
   private post(user: User): Promise<User> {
     return this.http
       .post(this.usersUrl, JSON.stringify(user))
-      .toPromise()
-      .then(response => {
-        return response.json().data;
-      })
-      .catch(this.handleError);
-  }
-
-  private postPtz(user: User): Promise<User> {
-    return this.http
-      .post(this.usersPtzUrl, JSON.stringify(user))
       .toPromise()
       .then(response => {
         return response.json().data;

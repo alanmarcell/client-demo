@@ -6,12 +6,11 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  private authenticated: boolean = false;
+  private authenticated = false;
   private token: string;
   private expires: any = 0;
   private expiresTimerId: any = null;
   private userAuthenticationUrl = 'api/authenticateUser';
-  private userAuthenticationUrlPtz = 'api/seedusers';  // URL to web api
 
   constructor(private http: HttpClient, private router: Router) {
     this.token = localStorage.getItem('_token');
@@ -33,10 +32,6 @@ export class AuthService {
     return this.postUser(user).then(() => this.router.navigate(['products']));
   }
 
-  authenticateUserPtz(user: User): Promise<any> {
-    return this.postUserPtz(user).then(() => this.router.navigate(['products']));
-  }
-
   public isAuthenticated() {
     return this.authenticated;
   }
@@ -47,25 +42,6 @@ export class AuthService {
     console.log('Session has been cleared');
   }
 
-  private postUserPtz(user: User): Promise<string> {
-    return this.http
-      .post(this.userAuthenticationUrl, JSON.stringify(user))
-      .toPromise()
-      .then(response => {
-        this.token = response.json().token;
-        if (response.json().success === false) { throw response };
-        const expiresSeconds = Number(response.json().expiresIn);
-        if (this.token) {
-          this.authenticated = true;
-          this.startExpiresTimer(expiresSeconds);
-          this.expires = new Date();
-          this.expires = this.expires.setSeconds(this.expires.getSeconds() + expiresSeconds);
-        }
-        localStorage.setItem('_token', this.token);
-        return this.token;
-      })
-      .catch(this.handleError);
-  }
 
   private postUser(user: User): Promise<string> {
     return this.http

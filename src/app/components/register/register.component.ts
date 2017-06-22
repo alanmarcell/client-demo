@@ -43,13 +43,13 @@ export class RegisterComponent implements OnInit {
     this.user.userNameOrEmail = this.user.email || this.user.userName;
 
     this.authenticationService
-      .authenticateUserPtz(this.user)
+      .authenticateUser(this.user)
       .catch(error => this.error = error);
   }
 
   savePtz() {
     this.userService
-      .savePtz(this.user)
+      .save(this.user)
       .then(user => {
         if (user) {
           this.user = user; // saved user, w/ id if new
