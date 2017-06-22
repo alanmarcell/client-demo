@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
+import { ICart, Cart } from '../../models/cart';
 import { Router } from '@angular/router';
 import R from 'ramda';
 
@@ -11,7 +12,7 @@ import R from 'ramda';
 
 export class CartComponent implements OnInit, OnChanges {
 
-  @Input() cart: Product[] = [];
+  @Input() cart: ICart = new Cart();
   products: Product[] = [];
   selectedProduct: Product;
   message = '';
@@ -52,13 +53,33 @@ export class CartComponent implements OnInit, OnChanges {
 
   onSelect(product: Product) { this.selectedProduct = product; }
 
+  idEq = (prod) => R.propEq('_id', prod._id)
+
   addToCart(selectedProduct: Product, quantity: number) {
-    const p = R.find(R.propEq('_id', selectedProduct._id))(this.cart);
+    const p = R.find(this.idEq(selectedProduct))(this.cart.productList);
     selectedProduct.quantity = quantity;
     selectedProduct.subTotal = selectedProduct.quantity * selectedProduct.price;
+    if (p) {
+      this.getTotal();
+      return;
+    };
+    this.cart.productList.push(selectedProduct);
+    this.getTotal();
+  }
 
-    if (p) { return };
-    this.cart.push(selectedProduct);
+  removeFromCart(selectedProduct: Product) {
+    this.cart.productList = R.remove(R.findIndex(R.propEq('_id', selectedProduct._id))(this.cart.productList), 1, this.cart.productList)
+    this.getTotal();
+  }
+
+  getTotal() {
+    this.cart.total = 0;
+    this.cart.productList.map(p => { this.cart.total += p.subTotal })
+    console.log('TOTAL :::', this.cart.total);
+  }
+
+  submitCart() {
+    console.log(this.cart);
   }
 
   next() {
