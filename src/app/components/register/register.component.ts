@@ -43,9 +43,9 @@ export class RegisterComponent implements OnInit {
       .catch(error => this.error = error);
   }
 
-  save() {
+  savePtz() {
     this.userService
-      .save(this.user)
+      .savePtz(this.user)
       .then(user => {
         if (user) {
           this.user = user; // saved user, w/ id if new
