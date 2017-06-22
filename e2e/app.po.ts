@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class H4TestPage {
+export class ClientDemoTestPage {
   navigateTo() {
     return browser.get('/');
   }

@@ -1,10 +1,10 @@
-import { H4TestPage } from './app.po';
+import { ClientDemoTestPage } from './app.po';
 
-describe('h4-test App', () => {
-  let page: H4TestPage;
+describe('Client Demo App', () => {
+  let page: ClientDemoTestPage;
 
   beforeEach(() => {
-    page = new H4TestPage();
+    page = new ClientDemoTestPage();
   });
 
   it('should display welcome message', () => {

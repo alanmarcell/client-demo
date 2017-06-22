@@ -10,7 +10,7 @@ import { ProductService } from './services/product.service';
 })
 
 export class AppComponent {
-  title = 'H4';
+  title = 'Client Demo';
   constructor(private authenticateService: AuthService,
     private productService: ProductService) { }
 
